@@ -14,7 +14,8 @@ const lightTheme = {
     backgroundColor: "whitesmoke"
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+// typescript形式に変更する場合、as HTMLElement追加
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
       <ThemeProvider theme={darkTheme}>
