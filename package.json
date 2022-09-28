@@ -56,5 +56,6 @@
     "@types/react-helmet": "^6.1.5",
     "@types/react-query": "^1.2.9",
     "@types/styled-components": "^5.1.26"
-  }
+  },
+  "homepage": "https://blog.wooks-study.dev/kuru-crypto-tracker/"
 }
