@@ -5,7 +5,7 @@ import Price from "./routes/Price";
 import Chart from "./routes/Chart";
 
 function Router() {
-    return <BrowserRouter>
+    return <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
             <Route path="/:coinId" element={<Coin />}>
                 <Route path="chart" element={<Chart />}/>
