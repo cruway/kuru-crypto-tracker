@@ -16,3 +16,9 @@ export function fetchCoinTickers(coinId: string) {
     return axios(`${BASE_URL}/tickers/${coinId}`).then(response =>
         response.data);
 }
+
+export function fetchCoinHistory(coinId:string) {
+    const date = Math.floor(Date.now() / 1000);
+    return axios(`${BASE_URL}/coins/${coinId}/ohlcv/historical?start=${date}&end=${date}`).then(response =>
+        response.data);
+}
