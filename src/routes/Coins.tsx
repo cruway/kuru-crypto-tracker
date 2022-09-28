@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import {Link} from "react-router-dom";
-import {useEffect, useState} from "react";
-import axios from "axios";
 import {useQuery} from "@tanstack/react-query";
 import {fetchCoins} from "../api";
+import {Helmet} from "react-helmet";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -68,6 +67,11 @@ function Coins() {
     const { isLoading, data } = useQuery<ICoin[]>(["allCoins"], fetchCoins);
     return (
         <Container>
+            <Helmet>
+                <title>
+                    Coin
+                </title>
+            </Helmet>
             <Header>
                 <Title>Coin</Title>
             </Header>

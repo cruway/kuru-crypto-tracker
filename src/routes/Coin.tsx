@@ -1,9 +1,6 @@
-import {Link, Outlet, Route, Routes, useLocation, useMatch, useParams} from "react-router-dom";
+import {Link, Outlet, useLocation, useMatch, useParams} from "react-router-dom";
 import styled from "styled-components";
-import {useEffect, useState} from "react";
-import axios from "axios";
-import Chart from "./Chart";
-import Price from "./Price";
+import { Helmet } from "react-helmet";
 import {useQuery} from "@tanstack/react-query";
 import {fetchCoinInfo, fetchCoinTickers} from "../api";
 
@@ -147,12 +144,22 @@ function Coin() {
     const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(
         ["info", coinId], () => fetchCoinInfo(coinId!));
     const { isLoading: tickersLoading, data: tickersData } = useQuery<PriceData>(
-        ["tickers", coinId], () => fetchCoinTickers(coinId!));
+        ["tickers", coinId], () => fetchCoinTickers(coinId!),
+        {
+            refetchInterval: 5000, // 5 seconds refresh
+        });
     const loading = infoLoading || tickersLoading;
     return (
         <Container>
+            <Helmet>
+                <title>
+                    {state?.toString() ? state : loading ? "Loading..." : infoData?.name }
+                </title>
+            </Helmet>
             <Header>
-                <Title>{state?.toString() ? state : loading ? "Loading..." : infoData?.name }</Title>
+                <Link to={`/`}>
+                    <Title>{state?.toString() ? state : loading ? "Loading..." : infoData?.name }</Title>
+                </Link>
             </Header>
             {loading ? (
                 <Loader>Loading...</Loader>
@@ -168,8 +175,8 @@ function Coin() {
                             <span>{infoData?.symbol}</span>
                         </OverviewItem>
                         <OverviewItem>
-                            <span>Open Source:</span>
-                            <span>{infoData?.open_source ? "Yes" : "No"}</span>
+                            <span>Price:</span>
+                            <span>{tickersData?.quotes.USD.price.toFixed(3)}</span>
                         </OverviewItem>
                     </Overview>
                     <Description>{infoData?.description}</Description>
