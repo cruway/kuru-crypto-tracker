@@ -18,7 +18,6 @@ const Header = styled.header`
 `;
 
 const CoinsList = styled.ul`
-  
 `;
 
 const Coin = styled.li`
