@@ -55,6 +55,18 @@ const Img = styled.img`
   margin-right: 10px;
 `;
 
+const ThemeButton = styled.button`
+  margin-left: 20px;
+  text-decoration: none;
+  padding: 10px 30px;
+  position: relative;
+  border: 1px solid ${props => props.theme.textColor};
+  border-radius: 4px;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+  background-color: ${props => props.theme.cardBgcolor};
+  color: ${props => props.theme.textColor};
+`;
+
 interface ICoin {
     id: string,
     name: string,
@@ -78,7 +90,7 @@ function Coins() {
             </Helmet>
             <Header>
                 <Title>Coin</Title>
-                <button onClick={toggleDarkAtom}>Toggle Mode</button>
+                <ThemeButton onClick={toggleDarkAtom}>Toggle Mode</ThemeButton>
             </Header>
             {isLoading ? (
                 <Loader>Loading...</Loader>
